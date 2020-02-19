@@ -1,12 +1,16 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Demo } from "./components/demo/inedx";
+import Routes from "./routes";
+
+
+const App = () => (
+    <div>
+        <Routes />
+    </div>
+);
 
 ReactDOM.render(
-    <Demo
-        compiler="TypeScript"
-        framework="React"
-    />,
+    <App />,
     document.getElementById("example")
 );
