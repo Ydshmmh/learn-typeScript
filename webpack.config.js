@@ -1,9 +1,12 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-
 module.exports = {
-    entry: "./src/index.tsx",
+    entry: "./src/app.tsx",
+    devServer: {
+        contentBase: "./dist",
+        host: "localhost"
+    },
     output: {
         filename: "app.js",
         path: __dirname + "/dist"
@@ -21,7 +24,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "test",
             template: path.resolve(__dirname, "index.html"),
-        })
+        }),
     ],
 
     module: {
@@ -34,7 +37,27 @@ module.exports = {
             },
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+
+            {
+                test: /\.css$|\.less/,
+                use: [
+                    require.resolve('style-loader'),
+                    {
+                      loader: require.resolve('css-loader'),
+                      options: {
+                        importLoaders: 1,
+                      },
+                    },
+                    {
+                      loader: require.resolve('less-loader'),
+                      options: {
+                            importLoaders: 1,
+                            javascriptEnabled: true
+                        }
+                    }    
+                ]
+            },
         ]
     },
 
