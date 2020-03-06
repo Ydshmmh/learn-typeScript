@@ -1,6 +1,2 @@
-/node_modules
-.idea
-/build
-/yarn.lock
-.prettierrc
-.vscode
+node_modules
+/dist
